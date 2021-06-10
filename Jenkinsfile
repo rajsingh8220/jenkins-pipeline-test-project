@@ -12,12 +12,12 @@ pipeline {
       }
     }
     stage('Upload to AWS'){
-      steps {
-        withAWS(region:'us-east-2', credentials:'aws-static') {
-          sh 'echo "Hello World with AWS creds"'
-          s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'index.html', bucket:'testwebsite123459')
-        }
-      }
+      steps{
+              sh 'aws s3 cp public/index.html s3://testwebsite123459'
+              sh 'aws s3api put-object-acl --bucket testwebsite123459 --key index.html --acl public-read'
+              sh 'aws s3 cp public/error.html s3://testwebsite123459'
+              sh 'aws s3api put-object-acl --bucket testwebsite123459 --key error.html --acl public-read'
+          }
     }
   }
 }
