@@ -13,9 +13,9 @@ pipeline {
     }
     stage('Upload to AWS'){
       steps{
-              sh 'aws s3 cp public/index.html s3://testwebsite123459'
+              sh 'aws s3 cp index.html s3://testwebsite123459'
               sh 'aws s3api put-object-acl --bucket testwebsite123459 --key index.html --acl public-read'
-              sh 'aws s3 cp public/error.html s3://testwebsite123459'
+              sh 'aws s3 cp error.html s3://testwebsite123459'
               sh 'aws s3api put-object-acl --bucket testwebsite123459 --key error.html --acl public-read'
           }
     }
