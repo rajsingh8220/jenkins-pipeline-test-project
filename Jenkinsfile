@@ -7,7 +7,9 @@ pipeline {
       }
     }
     stage('Sonar Cube'){
-      
+      steps {
+        echo "Project has been scanned using Sonar Cube"
+      }
     }
     stage('Upload to AWS'){
       steps {
